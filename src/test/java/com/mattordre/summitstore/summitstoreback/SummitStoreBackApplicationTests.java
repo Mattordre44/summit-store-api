@@ -1,10 +1,10 @@
-package com.mattordre.randostore.randostoreback;
+package com.mattordre.summitstore.summitstoreback;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RandoStoreBackApplicationTests {
+class SummitStoreBackApplicationTests {
 
     @Test
     void contextLoads() {

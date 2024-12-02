@@ -8,11 +8,11 @@
         <version>3.4.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.mattordre.randostore</groupId>
-    <artifactId>rando-store-back</artifactId>
+    <groupId>com.mattordre.summitstore</groupId>
+    <artifactId>summit-store-back</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>rando-store-back</name>
-    <description>rando-store-back</description>
+    <name>summit-store-back</name>
+    <description>summit-store-back</description>
     <url/>
     <licenses>
         <license/>
