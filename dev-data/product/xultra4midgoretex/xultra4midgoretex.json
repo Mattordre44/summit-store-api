@@ -1,0 +1,79 @@
+{
+  "type": "SHOES",
+  "name": "X Ultra 4 Mid Gore-Tex",
+  "price": 165.00,
+  "brand": "Salomon",
+  "description": "Get ready to power through uphills and descents with this mid-cut GORE-TEX version of the updated X-ULTRA 4. It is as agile as a trail-running shoe but with all the stability, grip and waterproof protection you need to tackle technical terrain. Equipped with a new chassis, the shoe is even better at protecting sensitive articulations without compromising freedom of movement.",
+  "material": "Textile / Synthetic / rubber",
+  "variants": [
+    {
+      "variantName": "Black / Magnet / Pearl Blue",
+      "imageDirName": "xultra4midgoretex-bmpb",
+      "images": [
+        { "fileName":  "xultra4midgoretex-bmpb-1.png", "order": 1 },
+        { "fileName":  "xultra4midgoretex-bmpb-2.png", "order": 2 },
+        { "fileName":  "xultra4midgoretex-bmpb-3.png", "order": 3 },
+        { "fileName":  "xultra4midgoretex-bmpb-4.png", "order": 4 },
+        { "fileName":  "xultra4midgoretex-bmpb-5.png", "order": 5 },
+        { "fileName":  "xultra4midgoretex-bmpb-6.png", "order": 6 },
+        { "fileName":  "xultra4midgoretex-bmpb-7.png", "order": 7 }
+      ]
+    },
+    {
+      "variantName": "Caramel Cafe / Gothic Olive / Black",
+      "imageDirName": "xultra4midgoretex-ccgob",
+      "images": [
+        { "fileName":  "xultra4midgoretex-ccgob-1.png", "order": 1 },
+        { "fileName":  "xultra4midgoretex-ccgob-2.png", "order": 2 },
+        { "fileName":  "xultra4midgoretex-ccgob-3.png", "order": 3 },
+        { "fileName":  "xultra4midgoretex-ccgob-4.png", "order": 4 },
+        { "fileName":  "xultra4midgoretex-ccgob-5.png", "order": 5 },
+        { "fileName":  "xultra4midgoretex-ccgob-6.png", "order": 6 },
+        { "fileName":  "xultra4midgoretex-ccgob-7.png", "order": 7 },
+        { "fileName":  "xultra4midgoretex-ccgob-8.png", "order": 8 }
+      ]
+    },
+    {
+      "variantName": "Sharkskin / Quiet Shade / Black",
+      "imageDirName": "xultra4midgoretex-sqsb",
+      "images": [
+        { "fileName":  "xultra4midgoretex-sqsb-1.png", "order": 1 },
+        { "fileName":  "xultra4midgoretex-sqsb-2.png", "order": 2 },
+        { "fileName":  "xultra4midgoretex-sqsb-3.png", "order": 3 },
+        { "fileName":  "xultra4midgoretex-sqsb-4.png", "order": 4 },
+        { "fileName":  "xultra4midgoretex-sqsb-5.png", "order": 5 },
+        { "fileName":  "xultra4midgoretex-sqsb-6.png", "order": 6 },
+        { "fileName":  "xultra4midgoretex-sqsb-7.png", "order": 7 },
+        { "fileName":  "xultra4midgoretex-sqsb-8.png", "order": 8 }
+      ]
+    },
+    {
+      "variantName": "Deep Lichen Green / Peat / Kelp",
+      "imageDirName": "xultra4midgoretex-dlgpk",
+      "images": [
+        { "fileName":  "xultra4midgoretex-dlgpk-1.png", "order": 1 },
+        { "fileName":  "xultra4midgoretex-dlgpk-2.png", "order": 2 },
+        { "fileName":  "xultra4midgoretex-dlgpk-3.png", "order": 3 },
+        { "fileName":  "xultra4midgoretex-dlgpk-4.png", "order": 4 },
+        { "fileName":  "xultra4midgoretex-dlgpk-5.png", "order": 5 },
+        { "fileName":  "xultra4midgoretex-dlgpk-6.png", "order": 6 },
+        { "fileName":  "xultra4midgoretex-dlgpk-7.png", "order": 7 },
+        { "fileName":  "xultra4midgoretex-dlgpk-8.png", "order": 8 }
+      ]
+    },
+    {
+      "variantName": "Stargazer / Black / Scarlet Ibis",
+      "imageDirName": "xultra4midgoretex-sbsi",
+      "images": [
+        { "fileName":  "xultra4midgoretex-sbsi-1.png", "order": 1 },
+        { "fileName":  "xultra4midgoretex-sbsi-2.png", "order": 2 },
+        { "fileName":  "xultra4midgoretex-sbsi-3.png", "order": 3 },
+        { "fileName":  "xultra4midgoretex-sbsi-4.png", "order": 4 },
+        { "fileName":  "xultra4midgoretex-sbsi-5.png", "order": 5 },
+        { "fileName":  "xultra4midgoretex-sbsi-6.png", "order": 6 },
+        { "fileName":  "xultra4midgoretex-sbsi-7.png", "order": 7 },
+        { "fileName":  "xultra4midgoretex-sbsi-8.png", "order": 8 }
+      ]
+    }
+  ]
+}
