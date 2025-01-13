@@ -18,7 +18,7 @@ import lombok.experimental.SuperBuilder;
 @DiscriminatorValue(ProductType.SHOES_VALUE)
 public class Shoes extends Product {
 
-    @Column(name = "material")
+    @Column(name = "material", length = 100)
     private String material;
 
 }

@@ -1,7 +1,7 @@
 CREATE TABLE product
 (
     id          UUID           NOT NULL,
-    type        VARCHAR(20)   NOT NULL,
+    type        VARCHAR(20)    NOT NULL,
     name        VARCHAR(100)   NOT NULL,
     description VARCHAR(1000)  NOT NULL,
     price       DECIMAL(10, 2) NOT NULL,

@@ -34,7 +34,7 @@ public abstract class Product {
     @Column(name = "name", nullable = false, unique = true, length = 100)
     private String name;
 
-    @Column(name = "description", length = 1000)
+    @Column(name = "description", nullable = false, length = 1000)
     private String description;
 
     @Column(name = "price", precision = 10, scale = 2, nullable = false)

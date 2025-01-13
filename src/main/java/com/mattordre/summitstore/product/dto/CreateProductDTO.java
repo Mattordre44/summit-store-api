@@ -23,6 +23,7 @@ public abstract class CreateProductDTO {
     @Positive(message = "Brand ID must be a positive number")
     private Integer brandId;
 
+    @NotEmpty(message = "Description is required")
     @Size(max = 1000, message = "Description must have up to 1000 characters")
     private String description;
 
