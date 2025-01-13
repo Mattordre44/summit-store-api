@@ -17,8 +17,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -31,10 +29,12 @@ public class ShoesService {
     private final ImageService imageService;
 
 
-    public Shoes getShoesById(UUID id) throws NoSuchElementException {
-        return shoesRepository.findById(id).orElseThrow();
-    }
-
+    /**
+     * Create a new shoes product with variants and images
+     * @param createShoesDTO DTO containing shoes details and variants with images to be created
+     * @return Created shoes object
+     * @throws InvalidArgumentException If brand is not found or image is not uploaded
+     */
     @Transactional
     public Shoes createShoes(CreateShoesDTO createShoesDTO) throws InvalidArgumentException {
         // Retrieve brand according to brandId from the dto
@@ -79,7 +79,6 @@ public class ShoesService {
         shoes.setVariants(variants);
 
         return shoesRepository.save(shoes);
-        //return createdShoes.getId();
     }
 
 }
