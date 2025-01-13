@@ -1,13 +1,13 @@
-package com.mattordre.summitstore.summitstoreback;
+package com.mattordre.summitstore;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SummitStoreBackApplication {
+public class SummitStoreApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SummitStoreBackApplication.class, args);
+        SpringApplication.run(SummitStoreApiApplication.class, args);
     }
 
 }

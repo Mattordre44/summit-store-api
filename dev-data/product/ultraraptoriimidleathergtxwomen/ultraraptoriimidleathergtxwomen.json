@@ -1,0 +1,21 @@
+{
+  "type": "SHOES",
+  "name": "Ultra Raptor II Mid Leather GTX Women",
+  "price": 199.00,
+  "brand": "La Sportiva",
+  "description": "Designed from the inside out to withstand the harshest conditions on unpredictable terrain, the Ultra Raptor II Mid Leather GTX Women's is the perfect option for hikers who need a boot that can handle the daily grind. Stable, all-terrain cushioning with a waterproof and breathable lining provides reliable protection on rough, wet trails.",
+  "material": "Textile / Leather / Rubber",
+  "variants": [
+    {
+      "variantName": "Grey / Cherry Tomato",
+      "imageDirName": "ultraraptoriimidleathergtxwomen-gct",
+      "images": [
+        { "fileName":  "ultraraptoriimidleathergtxwomen-gct-1.jpg", "order": 1 },
+        { "fileName":  "ultraraptoriimidleathergtxwomen-gct-2.jpg", "order": 2 },
+        { "fileName":  "ultraraptoriimidleathergtxwomen-gct-3.jpg", "order": 3 },
+        { "fileName":  "ultraraptoriimidleathergtxwomen-gct-4.jpg", "order": 4 },
+        { "fileName":  "ultraraptoriimidleathergtxwomen-gct-5.jpg", "order": 5 }
+      ]
+    }
+  ]
+}

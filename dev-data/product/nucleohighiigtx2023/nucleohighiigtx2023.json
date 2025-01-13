@@ -1,0 +1,25 @@
+{
+  "type": "SHOES",
+  "name": "Nucleo High II GTX (2023)",
+  "price": 239.00,
+  "brand": "La Sportiva",
+  "description": "The Nucleo High II GTX offers best-in class breathability in a mid-duty waterproof hiker/backpacking boot. Featuring award-winning Gore-Tex® Surround™ technology with a traditional Nubuck leather look, this hiking boot is the ultimate combination of durability, protection and comfort.",
+  "material": "Textile / Leather / Rubber",
+  "variants": [
+    {
+      "variantName": "Carbon / Chili",
+      "imageDirName": "nucleohighiigtx2023-cc",
+      "images": [
+        { "fileName":  "nucleohighiigtx2023-cc-1.jpg", "order": 1 },
+        { "fileName":  "nucleohighiigtx2023-cc-2.jpg", "order": 2 },
+        { "fileName":  "nucleohighiigtx2023-cc-3.jpg", "order": 3 },
+        { "fileName":  "nucleohighiigtx2023-cc-4.jpg", "order": 4 },
+        { "fileName":  "nucleohighiigtx2023-cc-5.jpg", "order": 5 },
+        { "fileName":  "nucleohighiigtx2023-cc-6.jpg", "order": 6 },
+        { "fileName":  "nucleohighiigtx2023-cc-7.jpg", "order": 7 },
+        { "fileName":  "nucleohighiigtx2023-cc-8.jpg", "order": 8 },
+        { "fileName":  "nucleohighiigtx2023-cc-9.jpg", "order": 9 }
+      ]
+    }
+  ]
+}
