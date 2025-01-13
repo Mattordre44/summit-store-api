@@ -24,7 +24,7 @@ public class UploadImageDTO {
         }
 
         String contentType = image.getContentType();
-        return contentType.equals("image/png");
+        return contentType.equals("image/png") || contentType.equals("image/jpeg") || contentType.equals("image/jpg");
     }
 
     @AssertTrue(message = "Image file size must not exceed 5 MB")
