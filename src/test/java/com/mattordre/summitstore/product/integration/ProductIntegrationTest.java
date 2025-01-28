@@ -8,10 +8,6 @@ import com.mattordre.summitstore.image.repository.BrandLogoRepository;
 import com.mattordre.summitstore.product.dto.CreateProductVariantImageDTO;
 import com.mattordre.summitstore.product.dto.CreateShoesDTO;
 import com.mattordre.summitstore.product.dto.CreateVariantDTO;
-import com.mattordre.summitstore.product.model.ProductType;
-import com.mattordre.summitstore.product.model.Shoes;
-import com.mattordre.summitstore.product.repository.ProductRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.testcontainers.containers.MinIOContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.containers.RabbitMQContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,7 +36,8 @@ import java.net.URI;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -64,6 +62,11 @@ public class ProductIntegrationTest {
     @Container
     protected static final MinIOContainer MINIO_CONTAINER = new MinIOContainer("minio/minio:latest");
 
+    @Container
+    @ServiceConnection
+    protected static final RabbitMQContainer RABBIT_MQ_CONTAINER = new RabbitMQContainer("rabbitmq:4.0-management")
+            .withAdminPassword("password");
+
     @DynamicPropertySource
     static void configureMinioProperties(DynamicPropertyRegistry registry) {
         String minioHost = MINIO_CONTAINER.getHost();
@@ -72,6 +75,10 @@ public class ProductIntegrationTest {
         registry.add("image.store.access.key", () -> "minioadmin");
         registry.add("image.store.secret.key", () -> "minioadmin");
         registry.add("image.store.region", () -> Region.US_EAST_1);
+        String rabbitMqHost = RABBIT_MQ_CONTAINER.getHost();
+        Integer rabbitMqPort = RABBIT_MQ_CONTAINER.getMappedPort(5672);
+        registry.add("spring.rabbitmq.host", () -> rabbitMqHost);
+        registry.add("spring.rabbitmq.port", () -> rabbitMqPort);
     }
 
     @Autowired
@@ -89,7 +96,7 @@ public class ProductIntegrationTest {
                         .forcePathStyle(true)
                         .credentialsProvider(() -> AwsBasicCredentials.create("minioadmin", "minioadmin"))
                         .region(Region.US_EAST_1)
-                        .build();
+                        .build()
         ) {
             s3Client.createBucket(CreateBucketRequest.builder().bucket(ImageType.BRAND.getBucketName()).build());
             s3Client.createBucket(CreateBucketRequest.builder().bucket(ImageType.PRODUCT.getBucketName()).build());

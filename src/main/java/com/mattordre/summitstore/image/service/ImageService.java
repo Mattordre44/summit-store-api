@@ -1,5 +1,6 @@
 package com.mattordre.summitstore.image.service;
 
+import com.mattordre.summitstore.config.S3ClientFactory;
 import com.mattordre.summitstore.image.exception.ImageNotFoundException;
 import com.mattordre.summitstore.image.exception.StorageAccessException;
 import com.mattordre.summitstore.image.model.ImageType;

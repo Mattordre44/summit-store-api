@@ -4,7 +4,7 @@ import com.mattordre.summitstore.image.exception.ImageNotFoundException;
 import com.mattordre.summitstore.image.exception.StorageAccessException;
 import com.mattordre.summitstore.image.model.ImageType;
 import com.mattordre.summitstore.image.service.ImageService;
-import com.mattordre.summitstore.image.service.S3ClientFactory;
+import com.mattordre.summitstore.config.S3ClientFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
