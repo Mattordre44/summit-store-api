@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.testcontainers.containers.MinIOContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.containers.RabbitMQContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -49,18 +50,26 @@ public class ImageIntegrationTest {
             .withUsername("test")
             .withPassword("test");
 
-
     @Container
     protected static final MinIOContainer MINIO_CONTAINER = new MinIOContainer("minio/minio:latest");
 
+    @Container
+    @ServiceConnection
+    protected static final RabbitMQContainer RABBIT_MQ_CONTAINER = new RabbitMQContainer("rabbitmq:4.0-management")
+            .withAdminPassword("password");
+
     @DynamicPropertySource
-    static void configureMinioProperties(DynamicPropertyRegistry registry) {
+    static void configureProperties(DynamicPropertyRegistry registry) {
         String minioHost = MINIO_CONTAINER.getHost();
         Integer minioPort = MINIO_CONTAINER.getMappedPort(9000);
         registry.add("image.store.url", () -> "http://" + minioHost + ":" + minioPort);
         registry.add("image.store.access.key", () -> "minioadmin");
         registry.add("image.store.secret.key", () -> "minioadmin");
         registry.add("image.store.region", () -> Region.US_EAST_1);
+        String rabbitMqHost = RABBIT_MQ_CONTAINER.getHost();
+        Integer rabbitMqPort = RABBIT_MQ_CONTAINER.getMappedPort(5672);
+        registry.add("spring.rabbitmq.host", () -> rabbitMqHost);
+        registry.add("spring.rabbitmq.port", () -> rabbitMqPort);
     }
 
 
@@ -72,7 +81,7 @@ public class ImageIntegrationTest {
                     .forcePathStyle(true)
                     .credentialsProvider(() -> AwsBasicCredentials.create("minioadmin", "minioadmin"))
                     .region(Region.US_EAST_1)
-                    .build();
+                    .build()
         ) {
             s3Client.createBucket(CreateBucketRequest.builder().bucket(ImageType.BRAND.getBucketName()).build());
             s3Client.createBucket(CreateBucketRequest.builder().bucket(ImageType.PRODUCT.getBucketName()).build());
