@@ -32,11 +32,54 @@ services:
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live' ]
       interval: 2s
+      start_period: 5s
+  rabbitmq:
+    image: 'rabbitmq:4.0-management'
+    container_name: 'main-queue'
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    ports:
+      - '5672:5672' # AMQP Port
+      - '15672:15672' # Web UI
+    volumes:
+        - 'rabbitmq-data:/var/lib/rabbitmq'
+    networks:
+      - 'app-network'
+    healthcheck:
+        test: ['CMD', 'rabbitmq-diagnostics', 'status' ]
+        interval: 2s
+        start_period: 5s
+  image-processing-service:
+    build: 'https://github.com/Mattordre44/summit-store-image-processing-service.git'
+    container_name: 'image-processing-service'
+    environment:
+      # S3 Configuration
+      - S3_ENDPOINT=http://minio:9000
+      - S3_REGION=us-east-1
+      - S3_ACCESS_KEY=minio
+      - S3_SECRET=password
+
+      # RabbitMQ Configuration
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USER=user
+      - RABBITMQ_PASSWORD=password
+      - QUEUE_NAME=image.processing.background
+    networks:
+      - 'app-network'
+    depends_on:
+      rabbitmq:
+        condition: 'service_healthy'
+      minio:
+        condition: 'service_healthy'
 
 volumes:
   postgres-data:
     driver: local
   minio-data:
+    driver: local
+  rabbitmq-data:
     driver: local
 
 networks:

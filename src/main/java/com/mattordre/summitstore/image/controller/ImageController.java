@@ -3,7 +3,9 @@ package com.mattordre.summitstore.image.controller;
 import com.mattordre.summitstore.image.dto.UploadImageDTO;
 import com.mattordre.summitstore.image.exception.ImageNotFoundException;
 import com.mattordre.summitstore.image.model.ImageType;
+import com.mattordre.summitstore.image.service.ImageProcessingService;
 import com.mattordre.summitstore.image.service.ImageService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -22,6 +24,8 @@ import java.nio.file.Paths;
 public class ImageController {
 
     private final ImageService imageService;
+
+    private final ImageProcessingService imageProcessingService;
 
 
     @GetMapping(value = "{filename}", produces = {MediaType.IMAGE_PNG_VALUE})
@@ -42,9 +46,10 @@ public class ImageController {
 
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<String> uploadImage(@Valid @ModelAttribute UploadImageDTO uploadImageDTO) {
-       String fileName = imageService.uploadImage(uploadImageDTO.getImage(), uploadImageDTO.getType());
-       // Return the image fileName which can be used to access the image
-       return ResponseEntity.ok(fileName);
+        String fileName = imageService.uploadImage(uploadImageDTO.getImage(), uploadImageDTO.getType());
+        imageProcessingService.processImageBackground(fileName, uploadImageDTO.getType());
+        // Return the image fileName which can be used to access the image
+        return ResponseEntity.ok(fileName);
     }
 
 }

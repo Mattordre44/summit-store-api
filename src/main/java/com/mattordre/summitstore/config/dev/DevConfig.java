@@ -2,12 +2,11 @@ package com.mattordre.summitstore.config.dev;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mattordre.summitstore.brand.dto.CreateBrandDTO;
 import com.mattordre.summitstore.brand.model.Brand;
 import com.mattordre.summitstore.brand.service.BrandService;
+import com.mattordre.summitstore.config.S3ClientFactory;
 import com.mattordre.summitstore.image.model.ImageType;
 import com.mattordre.summitstore.image.service.ImageService;
-import com.mattordre.summitstore.image.service.S3ClientFactory;
 import com.mattordre.summitstore.product.dto.CreateProductVariantImageDTO;
 import com.mattordre.summitstore.product.dto.CreateShoesDTO;
 import com.mattordre.summitstore.product.dto.CreateVariantDTO;
@@ -36,7 +35,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Stream;
 
 @Service
@@ -59,6 +57,8 @@ public class DevConfig {
     private String region;
 
     private final S3ClientFactory s3ClientFactory;
+
+    private final DevBrandData devBrandData;
 
     private final BrandService brandService;
 
@@ -110,44 +110,7 @@ public class DevConfig {
         // Retrieve all directories in the brand directory
         Path brandDirPath = Paths.get("dev-data/brand");
         try (Stream<Path> directories = Files.list(brandDirPath)) {
-            directories.filter(Files::isDirectory).forEach(directory -> {
-                try {
-                    // Locate JSON and image files
-                    Path jsonFilePath = directory.resolve(directory.getFileName() + ".json");
-                    Path imageFilePath = directory.resolve(directory.getFileName() + "-logo.png");
-
-                    if (Files.exists(jsonFilePath) && Files.exists(imageFilePath)) {
-                        // Parse JSON file into DTO
-                        ObjectMapper objectMapper = new ObjectMapper();
-                        var values = objectMapper.readValue(jsonFilePath.toFile(), CreateBrandDTO.class);
-
-                        // Check if brand already exists
-                        if (brandService.getBrands().stream().anyMatch(brand -> brand.getName().equals(values.getName()))) {
-                            log.info("Brand already exists: {}", values.getName());
-                            return;
-                        }
-
-                        MultipartFile imageFile = new DevModeMultipartFile(imageFilePath.toFile());
-
-                        // Upload image and set the filename in the DTO
-                        String uploadedFileName = imageService.uploadImage(imageFile, ImageType.BRAND);
-                        CreateBrandDTO brandDTO = CreateBrandDTO.builder()
-                                .name(values.getName())
-                                .description(values.getDescription())
-                                .imageFileName(uploadedFileName)
-                                .build();
-
-                        // Create brand using the service
-                        brandService.createBrand(brandDTO);
-
-                        log.info("Successfully added brand: {}", brandDTO.getName());
-                    } else {
-                        log.warn("Missing files for brand in directory: {}", directory);
-                    }
-                } catch (IOException e) {
-                    log.error("Error processing brand directory: {}", directory, e);
-                }
-            });
+            directories.filter(Files::isDirectory).forEach(devBrandData::populateBrand);
         } catch (IOException e) {
             log.error("Error reading brand directory: dev-data/brand", e);
         }

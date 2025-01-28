@@ -1,4 +1,4 @@
-package com.mattordre.summitstore.image.service;
+package com.mattordre.summitstore.config;
 
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
